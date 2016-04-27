@@ -5,13 +5,12 @@
     <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/style.css">
-    <script src="js/code.js" charset="utf-8"></script>
+    <script src="js/vuejs.js"></script>
   </head>
   <body>
-    <div class="container">
-      <header>
-        <nav id='top-menu' class="navbar navbar-default navbar-fixed-top" >
-          <div class="container">
+    <header>
+      <div class="container">
+        <nav id='top-menu' class="navbar navbar-default" >
             <!--Logotipo-->
             <div class="navbar-header">
               <a href="#" class="navbar-brand">
@@ -20,12 +19,11 @@
             </div>
             <!--Elementos del menu-->
             <ul class="nav navbar-nav">
-              <li><a href="#" >Comandos</a></li>
               <li><a href="#">Noticias</a></li>
               <li><a href="#">Historia</a></li>
               <!--Boton desplegable-->
               <li class="dropdown">
-                <a href="#" class="dropdown-toggle" data-toggle='dropdown' role="button" aria-haspopup="true" aria-expanded="false">Distribuciones<span class="caret"></span></a>
+                <a href="#" class="dropdown-toggle" data-toggle='dropdown'>Distribuciones<span class="caret"></span></a>
                 <ul class="dropdown-menu">
                   <li><a href="#">Fedora</a></li>
                   <li><a href="#">Ubuntu</a></li>
@@ -33,13 +31,24 @@
                 </ul>
               </li>
             </ul>
-          </div>
+            <form class="navbar-form navbar-left" role="search">
+              <div class="form-group">
+                <input class="form-control form-right" type='text' v-model="message">
+              </div>
+            </form>
         </nav>
-      </header>
+      </div>
+    </header>
+    <!-- <pre>{{$data | json}}</pre> -->
+    <div class="container" v-for="comando in comandos" v-show="message==comando.nombre">
+      <section class="main" id='content'>
+        <article class="col-md-6 bg-success">
+          <h1 class="text-center"><span class="glyphicon glyphicon-chevron-left"></span>{{comando.nombre}}<span class="glyphicon glyphicon-chevron-right"></span></h1>
+          <p><pre>{{comando.descripcion}}<br>{{comando.arg}}</pre></p>
+        </article>
+      </section>
     </div>
-
-
-
+    <script src="js/code.js" charset="utf-8"></script>
     <script src="js/jquery.js"></script>
     <script src="js/bootstrap.min.js"></script>
   </body>
